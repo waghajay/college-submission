@@ -1,6 +1,31 @@
 <h1>Welcome to institute dashboard</h1>
 
+<br>
 
+<form action="{% url 'add-year' %}" method="post">
+    {% if messages %}
+    <div class="alert alert-info alert-message" style="color: #475569;font-size: 1.1rem;background-color: #f8d7da;border: #f5c6cb;font-weight: 600;text-align: center;">
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% csrf_token %}
+    <label for="">Add Year Form</label>
+    <label for="year">Year</label>
+    <select name="year" id="year">
+        <option value="1st Year">1st Year</option>
+        <option value="2nd Year">2nd Year</option>
+        <option value="3rd Year">3rd Year</option>
+        <option value="4th Year">4th Year</option>
+    </select>
+    <button type="submit">Add Year</button>
+</form>
+
+
+
+{% if faculties %}
+<br><br>
 <p>Faculties thos are not approved </p>
 <table border="1">
     <tr>
@@ -8,6 +33,7 @@
         <th>Faculty Email</th>
         <th>Faculty Department</th>
         <th>Faculty Status</th>
+        <th>Change Status</th>
     </tr>
     {% for faculty in faculties %}
     <tr>
@@ -15,5 +41,30 @@
         <td>{{ faculty.faculty_email }}</td>
         <td>{{ faculty.department }}</td>
         <td>{{ faculty.is_approved }}</td>
+        <td><a href="{% url 'approve-faculty' faculty.id %}"><button>Approve</button></a></td>
     </tr>
     {% endfor %}
+</table>
+{% endif %}
+
+{% if years %}
+<br><br>
+<p>All the Year of Department</p>
+<table border="1">
+    <tr>
+        <th>Year Name</th>
+        <th>Manage</th>
+    </tr>
+    {% for year in years %}
+    <tr>
+        <td>{{ year.year_name }}</td>
+        <td><a href="{% url 'year-details' year.id %}"><button>Manage</button></a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No Year Found</p>
+{% endif %}
+
+
+    

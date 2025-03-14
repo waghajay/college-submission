@@ -1,0 +1,22 @@
+    <h1>{{department.department_name}}</h1>
+
+    <br><br><br><br><br>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Faculty Name</th>
+                <th>Faculty Email</th>
+                <th>Faculty Department</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for faculty in faculties %}
+            <tr>
+                <td>{{ faculty.faculty_name }}</td>
+                <td>{{ faculty.faculty_email }}</td>
+                <td><a href="{% url 'department-details' department.id %}"><button>Manage Department</button></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>

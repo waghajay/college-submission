@@ -18,7 +18,9 @@
 
     <input type="password" name="department-password" id="department-password" required placeholder="Enter department Password">
 
-    <button type="submit">Register HOD</button>
+    <button type="submit">Register Department</button>
+
+</form>
 
 
 
@@ -26,7 +28,6 @@
     <table border="1">
         <thead>
             <tr>
-                <th>Department ID</th>
                 <th>Department Name</th>
                 <th>Department Email</th>
                 <th>Manage Department</th>
@@ -35,10 +36,9 @@
         <tbody>
             {% for department in departments %}
             <tr>
-                <td>{{ department.id }}</td>
                 <td>{{ department.department_name }}</td>
                 <td>{{ department.department_email }}</td>
-                <td><button>Manage Department</button></td>
+                <td><a href="{% url 'department-details' department.id %}"><button>Manage Department</button></a></td>
             </tr>
             {% endfor %}
         </tbody>

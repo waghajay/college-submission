@@ -1,0 +1,45 @@
+<h1>Year Name :- {{year.year_name}}</h1>
+
+
+<form action="{% url 'add-division' %}" method="post">
+    {% if messages %}
+    <div class="alert alert-info alert-message" style="color: #475569;font-size: 1.1rem;background-color: #f8d7da;border: #f5c6cb;font-weight: 600;text-align: center;">
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% csrf_token %}
+    <label for="">Form For Adding Division in the Year  :- </label>
+    <label for="division_name">Division</label>
+    <input type="text" name="division_name" id="division_name" placeholder="Enter Division" value="{{ department_name }} - {{ year.year_name }} - "> 
+    <label for="faculty">Class Teacher/Faculty</label>
+    <select name="faculty" id="faculty">
+        {% for faculty in faculties %}
+        <option value="{{ faculty.id }}">{{faculty.faculty_name}}</option>
+        {% endfor %}
+    </select>
+    <input type="hidden" name="year" id="year" value="{{year.id}}">
+    <button type="submit">Add Division</button>
+</form>
+
+{% if divisions %}
+<br><br>
+<p>All the Divisions of {{ year.year_name }}</p>
+<table border="1">
+    <tr>
+        <th>Division Name</th>
+        <th>Faculty Name</th>
+        <th>Manage</th>
+    </tr>
+    {% for division in divisions %}
+    <tr>
+        <td>{{ division.division_name }}</td>
+        <td>{{ division.faculty.faculty_name }}</td>
+        <td><a href="{% url 'division-details' division.id %}"><button>Manage</button></a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No Division Found</p>
+{% endif %}
