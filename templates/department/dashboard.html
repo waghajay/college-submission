@@ -1,1 +1,19 @@
 <h1>Welcome to institute dashboard</h1>
+
+
+<p>Faculties thos are not approved </p>
+<table border="1">
+    <tr>
+        <th>Faculty Name</th>
+        <th>Faculty Email</th>
+        <th>Faculty Department</th>
+        <th>Faculty Status</th>
+    </tr>
+    {% for faculty in faculties %}
+    <tr>
+        <td>{{ faculty.faculty_name }}</td>
+        <td>{{ faculty.faculty_email }}</td>
+        <td>{{ faculty.department }}</td>
+        <td>{{ faculty.is_approved }}</td>
+    </tr>
+    {% endfor %}

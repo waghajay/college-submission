@@ -152,11 +152,17 @@ def loginFaculty(request):
             messages.error(request, "You are not a Faculty.")
             return redirect('faculty-login')
 
+        faculty = Faculty.objects.filter(user=user).first()
+        if faculty and not faculty.is_approved:
+            messages.error(request, "The higher authority has not approved you yet...")
+            return redirect('faculty-login')
+
         login(request, user)
         messages.success(request, "Welcome to the Faculty dashboard!")
         return redirect('faculty-dashboard')
 
     return render(request, 'accounts/faculty/login.html')
+
 
 
 
@@ -210,7 +216,14 @@ def loginStudent(request):
         if profile is None or profile.role != 'student':
             messages.error(request, "You are not a Student.")
             return redirect('student-login')
-
+        
+        
+        student = Student.objects.filter(user=user).first()
+        if student and not student.is_approved:
+            messages.error(request, "The higher authority has not approved you yet...")
+            return redirect('student-login')
+        
+        
         login(request, user)
         messages.success(request, "Welcome to the Student dashboard!")
         return redirect('student-dashboard')
