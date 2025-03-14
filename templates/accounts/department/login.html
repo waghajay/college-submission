@@ -1,0 +1,17 @@
+<form action="{% url 'department-login' %}" method="post">
+    {% if messages %}
+    <div class="alert alert-info alert-message" style="color: #475569;font-size: 1.1rem;background-color: #f8d7da;border: #f5c6cb;font-weight: 600;text-align: center;">
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% csrf_token %}
+    <label for="department-email">Department Email</label>
+    <input type="email" name="department-email" id="department-email" required placeholder="Enter Department Email">
+    <br><br>
+    <label for="department-password">Department Password</label>
+    <input type="password" name="department-password" id="department-password" required placeholder="Enter Password">
+    <br>
+    <button type="submit">Login</button>
+</form>

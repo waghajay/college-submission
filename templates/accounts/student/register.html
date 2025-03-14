@@ -1,0 +1,28 @@
+<form action="{% url 'student-register' %}" method="post">
+    {% if messages %}
+    <div class="alert alert-info alert-message" style="color: #475569;font-size: 1.1rem;background-color: #f8d7da;border: #f5c6cb;font-weight: 600;text-align: center;">
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% csrf_token %}
+    <label for="student_name">Student Name</label>
+    <input type="text" name="student_name" id="student_name" required placeholder="Enter Name">
+    <br>
+    <label for="student_email">Student Email</label>
+    <input type="email" name="student_email" id="student_email" required placeholder="Enter Email">
+    <br>
+    <label for="student-department">Student Department</label>
+    <select name="department" id="department">
+        <option value="">--</option>
+        {% for department in departments %}
+        <option value="{{department.id}}">{{department.department_name}}</option>
+        {% endfor %}
+    </select>
+    <br>
+    <label for="student-password">Student Password</label>
+    <input type="password" name="password" id="password" required placeholder="Enter Password">
+    <br>
+    <button type="submit">Register</button>
+</form>

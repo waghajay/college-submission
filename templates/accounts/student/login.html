@@ -1,0 +1,17 @@
+<form action="{% url 'student-login' %}" method="post">
+    {% if messages %}
+    <div class="alert alert-info alert-message" style="color: #475569;font-size: 1.1rem;background-color: #f8d7da;border: #f5c6cb;font-weight: 600;text-align: center;">
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% csrf_token %}
+    <label for="student-email">Student Email</label>
+    <input type="email" name="student-email" id="student-email" required placeholder="Enter student Email">
+    <br><br>
+    <label for="student-password">Student Password</label>
+    <input type="password" name="student-password" id="student-password" required placeholder="Enter Password">
+    <br>
+    <button type="submit">Login</button>
+</form>

@@ -1,0 +1,46 @@
+<h1>Welcome to institute dashboard</h1>
+
+
+
+<form action="{% url 'department-register' %}" method="post">
+    {% csrf_token %}
+    <label for="">Register Department</label>
+    <br>
+    <br>
+    <label for="department-name">Department Name</label>
+    <input type="text" name="department-name" id="department-name" placeholder="Department Name" required>
+
+
+    <label for="department-email">Department Email</label>
+    <input type="email" name="department-email" id="department-email" required placeholder="Enter Department Email">
+
+    <label for="department-password">Department Password</label>
+
+    <input type="password" name="department-password" id="department-password" required placeholder="Enter department Password">
+
+    <button type="submit">Register HOD</button>
+
+
+
+    <br><br><br><br>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Department ID</th>
+                <th>Department Name</th>
+                <th>Department Email</th>
+                <th>Manage Department</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for department in departments %}
+            <tr>
+                <td>{{ department.id }}</td>
+                <td>{{ department.department_name }}</td>
+                <td>{{ department.department_email }}</td>
+                <td><button>Manage Department</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    

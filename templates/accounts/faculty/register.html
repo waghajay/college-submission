@@ -1,0 +1,28 @@
+<form action="{% url 'faculty-register' %}" method="post">
+    {% if messages %}
+    <div class="alert alert-info alert-message" style="color: #475569;font-size: 1.1rem;background-color: #f8d7da;border: #f5c6cb;font-weight: 600;text-align: center;">
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% csrf_token %}
+    <label for="faculty_name">Faculty Name</label>
+    <input type="text" name="faculty_name" id="faculty_name" required placeholder="Enter Name">
+    <br>
+    <label for="faculty_email">Faculty Email</label>
+    <input type="email" name="faculty_email" id="faculty_email" required placeholder="Enter Email">
+    <br>
+    <label for="faculty-department">Faculty Department</label>
+    <select name="department" id="department">
+        <option value="">--</option>
+        {% for department in departments %}
+        <option value="{{department.id}}">{{department.department_name}}</option>
+        {% endfor %}
+    </select>
+    <br>
+    <label for="faculty-password">Faculty Password</label>
+    <input type="password" name="password" id="password" required placeholder="Enter Password">
+    <br>
+    <button type="submit">Register</button>
+</form>
